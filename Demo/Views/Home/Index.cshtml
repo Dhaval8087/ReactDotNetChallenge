@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Demo.Context.Contact>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Contact List</h2>
+
+<p>
+    <input type="button"
+           value="Create Contacts"
+           onclick="location.href='@Url.Action("Create", "Home")'" style="float:inline-end" />
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Contact Name
+        </th>
+        <th>
+            Contact Address
+        </th>
+        <th>
+            Contact Phone Number
+        </th>
+        <th>
+           Contact Email
+        </th>
+         <th>
+           Action
+        </th>
+    </tr>
+    @foreach (var contact in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => contact.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(x => contact.ContactAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(x => contact.ContactPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(x => contact.ContactEmail)
+            </td>
+            <td>
+                <a href="javascript:void(0);" class="anchorDetail" data-id="@contact.ContactId">View</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>   
+
+@section scripts
+                {
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        var TeamDetailPostBackURL = '/Home/Details';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+        });
+
+    </script>
+
+}

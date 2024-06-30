@@ -1,0 +1,44 @@
+﻿@model Demo.Context.Contact
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Contacts</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(x => x.ContactName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.ContactName, new { @maxlength = "100", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ContactAddress, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.ContactAddress, new { @maxlength = "150", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ContactPhoneNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.ContactPhoneNumber, new { @maxlength = "10", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.ContactEmail, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.ContactEmail, new { @maxlength = "100", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" style="margin-top:20px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Contacts" style="float:inline-end;" />
+            </div>
+        </div>
+    </div>
+}  

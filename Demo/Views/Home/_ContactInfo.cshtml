@@ -1,0 +1,52 @@
+﻿@model Demo.Context.Contact
+
+<div>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Contacts Info</h4>
+        <input type="button"
+               value="X"
+               onclick="location.href='@Url.Action("Index", "Home")'" style="float:inline-end" />
+    </div>
+
+
+    <hr />
+    @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.ContactId)
+        <div class="form-horizontal" style="margin-left:35px">
+            <div class="form-group">
+                @Html.LabelFor(x => x.ContactName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.ContactName, new { @maxlength = "100", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.ContactAddress, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.ContactAddress, new { @maxlength = "150", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.ContactPhoneNumber, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.ContactPhoneNumber, new {@maxlength = "10", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.ContactEmail, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.ContactEmail, new { @maxlength = "100", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Delete" style="float:inline-end;" onclick="location.href='@Url.Action("Delete", "Home", new{id = Model.ContactId})'" />
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" style="float:inline-end;" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
